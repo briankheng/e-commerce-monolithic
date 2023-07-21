@@ -11,26 +11,33 @@ use Inertia\Response;
 
 class StoreController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): Response
     {
         $req = Http::get('https://labpro-single-service-be.vercel.app/barang')->json();
         $data = $req['data'];
 
-        return Inertia::render('Store', [
+        return Inertia::render('Store/Index', [
             'data' => $data,
         ]);
     }
 
-    public function show(string $id): Response
+    public function detail(string $id): Response
     {
         $req = Http::get('https://labpro-single-service-be.vercel.app/barang/' . $id)->json();
         $data = $req['data'];
 
-        return Inertia::render('Detail', [
+        return Inertia::render('Store/Detail', [
             'data' => $data,
+        ]);
+    }
+
+    public function order(string $id): Response
+    {
+        $req = Http::get('https://labpro-single-service-be.vercel.app/barang/' . $id)->json();
+        $data = $req['data'];
+
+        return Inertia::render('Store/Order', [
+            'product' => $data,
         ]);
     }
 }

@@ -16,7 +16,8 @@ use Inertia\Inertia;
 |
 */
 
-Route::resource('/', StoreController::class)->only(['index'])->middleware(['auth', 'verified']);
-Route::get('/{id}', [StoreController::class, 'show'])->name('store.show')->middleware(['auth', 'verified']);
+Route::get('/', [StoreController::class, 'index'])->name('store.index')->middleware(['auth', 'verified']);
+Route::get('/{id}', [StoreController::class, 'detail'])->name('store.detail')->middleware(['auth', 'verified']);
+Route::get('/order/{id}', [StoreController::class, 'order'])->name('store.order')->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

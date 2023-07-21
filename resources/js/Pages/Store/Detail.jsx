@@ -1,6 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import placeholder from "../../../public/placeholder.png";
-import { Head } from "@inertiajs/react";
+import placeholder from "../../../../public/placeholder.png";
+import { Head, Link } from "@inertiajs/react";
 import React from "react";
 
 export default function Detail({ auth, data }) {
@@ -15,9 +15,9 @@ export default function Detail({ auth, data }) {
         >
             <Head title="Detail" />
 
-            <div class="bg-white">
+            <div class="bg-gray-100">
                 <div class="pt-6">
-                    <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
+                    <div class="mx-auto max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
                         <div class="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
                             <img
                                 src={placeholder}
@@ -141,14 +141,14 @@ export default function Detail({ auth, data }) {
                                 </div>
                             </div>
 
-                            <form class="mt-10">
+                            <Link class="mt-10" href={route("store.order", data.id)}>
                                 <button
                                     type="submit"
                                     class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                 >
                                     Purchase
                                 </button>
-                            </form>
+                            </Link>
                         </div>
 
                         <div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">

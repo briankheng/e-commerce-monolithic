@@ -1,6 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
-import placeholder from "../../../public/placeholder.png";
+import placeholder from "../../../../public/placeholder.png";
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
@@ -66,7 +66,7 @@ export default function Store({ auth, data = [] }) {
                                     <h3 className="text-sm text-gray-700">
                                         <Link
                                             href={route(
-                                                "store.show",
+                                                "store.detail",
                                                 product.id
                                             )}
                                         >

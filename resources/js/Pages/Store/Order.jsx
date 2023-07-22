@@ -1,26 +1,39 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
-import React, { useEffect } from "react";
+import React from "react";
 import placeholder from "../../../../public/placeholder.png";
 
 export default function Order({ auth, product }) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        total: product.harga,
+        product_id: product.id,
+        product_name: product.nama,
         quantity: 1,
+        total_price: product.harga,
     });
 
     const handlePlus = () => {
         if (data.quantity < product.stok) {
             setData((data) => ({ ...data, quantity: data.quantity + 1 }));
-            setData((data) => ({ ...data, total: data.total + product.harga }));
+            setData((data) => ({
+                ...data,
+                total_price: data.total_price + product.harga,
+            }));
         }
     };
 
     const handleMinus = () => {
         if (data.quantity > 1) {
             setData((data) => ({ ...data, quantity: data.quantity - 1 }));
-            setData((data) => ({ ...data, total: data.total - product.harga }));
+            setData((data) => ({
+                ...data,
+                total_price: data.total_price - product.harga,
+            }));
         }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        post(route("history.store"), { onSuccess: () => reset() });
     };
 
     return (
@@ -97,7 +110,7 @@ export default function Order({ auth, product }) {
                                                 </div>
                                             </td>
                                             <td class="py-4">
-                                                Rp {data.total}
+                                                Rp {data.total_price}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -111,7 +124,7 @@ export default function Order({ auth, product }) {
                                 </h2>
                                 <div class="flex justify-between mb-2">
                                     <span>Subtotal</span>
-                                    <span>Rp {data.total}</span>
+                                    <span>Rp {data.total_price}</span>
                                 </div>
                                 <div class="flex justify-between mb-2">
                                     <span>Taxes</span>
@@ -125,19 +138,15 @@ export default function Order({ auth, product }) {
                                 <div class="flex justify-between mb-2">
                                     <span class="font-semibold">Total</span>
                                     <span class="font-semibold">
-                                        Rp {data.total}
+                                        Rp {data.total_price}
                                     </span>
                                 </div>
 
-                                {product.stok == 0 ? (
-                                    <button
-                                        class="bg-gray-500 text-white py-2 px-4 rounded-lg mt-4 w-full"
-                                        disabled
-                                    >
-                                        Checkout
-                                    </button>
-                                ) : null}
-                                <button class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full hover:bg-blue-400">
+                                <button
+                                    class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full hover:bg-blue-400"
+                                    disabled={product.stok <= 0 || processing}
+                                    onClick={handleSubmit}
+                                >
                                     Checkout
                                 </button>
                             </div>

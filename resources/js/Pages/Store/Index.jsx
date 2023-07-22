@@ -6,7 +6,7 @@ import ReactPaginate from "react-paginate";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { motion } from "framer-motion";
 
-export default function Store({ auth, data = [] }) {
+export default function Store({ auth, products = [] }) {
     const itemsPerPage = 4;
     const [currentItems, setCurrentItems] = useState(null);
     const [pageCount, setPageCount] = useState(0);
@@ -30,12 +30,12 @@ export default function Store({ auth, data = [] }) {
 
     useEffect(() => {
         const endOffset = itemOffset + itemsPerPage;
-        setCurrentItems(data.slice(itemOffset, endOffset));
-        setPageCount(Math.ceil(data.length / itemsPerPage));
+        setCurrentItems(products.slice(itemOffset, endOffset));
+        setPageCount(Math.ceil(products.length / itemsPerPage));
     }, [itemOffset, itemsPerPage]);
 
     const handlePageClick = (event) => {
-        const newOffset = (event.selected * itemsPerPage) % data.length;
+        const newOffset = (event.selected * itemsPerPage) % products.length;
         setItemOffset(newOffset);
     };
 

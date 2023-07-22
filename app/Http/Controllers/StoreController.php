@@ -17,7 +17,7 @@ class StoreController extends Controller
         $data = $req['data'];
 
         return Inertia::render('Store/Index', [
-            'data' => $data,
+            'products' => $data,
         ]);
     }
 
@@ -27,7 +27,7 @@ class StoreController extends Controller
         $data = $req['data'];
 
         return Inertia::render('Store/Detail', [
-            'data' => $data,
+            'product' => $data,
         ]);
     }
 

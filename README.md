@@ -26,9 +26,12 @@
 7. Projek dapat dijalankan pada "http://localhost:8080"
 
 ## Design Pattern
-- Singleton Pattern
-- Repository Pattern
-- MVC Pattern
+- Abstract Factory <br>
+  Terdapat kelas Controller yang menjadi kelas abstrak untuk kelas AuthenticatedSessionController, RegisteredUserController, HistoryController dan StoreController.
+- Chain of Responsibility <br>
+  Terdapat middleware yang digunakan untuk mengecek apakah seorang user telah terautentikasi agar request dapat diproses.
+- MVC Pattern <br>
+  Dilakukan pembagian arsitektur menjadi model-view-controller, model untuk mengatur database, view untuk mengatur tampilan user, dan controller untuk menghubungkan antara view dan model.
 
 ## Technology Stack
 - PHP 8.2.4
